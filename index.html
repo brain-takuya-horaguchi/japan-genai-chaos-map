@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本生成AI企業カオスマップ 2025</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap&preload');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --dark-gradient: linear-gradient(135deg, #434343 0%, #000000 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+            --shadow-heavy: 0 20px 60px rgba(31, 38, 135, 0.5);
+            --border-radius: 20px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            will-change: transform;
+            animation: float 25s infinite linear;
+        }
+
+
+        .shape:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 70%;
+            left: 80%;
+            animation-delay: 8s;
+        }
+
+        .shape:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            top: 40%;
+            left: 70%;
+            animation-delay: 16s;
+        }
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(180deg);
+            }
+        }
+
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-heavy);
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 400;
+            position: relative;
+        }
+
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+
+        .stat-item {
+            padding: 30px;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 30px 40px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            flex-wrap: wrap;
+        }
+
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+
+        .legend-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .legend-text {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+
+        .chaos-map {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+
+        .category {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--category-color, var(--primary-gradient));
+            transition: var(--transition);
+        }
+
+
+        .category:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+
+        .category:hover::before {
+            height: 6px;
+        }
+
+
+        .category-header {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        .category-icon {
+            font-size: 1.8rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+
+        .category-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+
+        .category-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--category-color, var(--primary-gradient));
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+
+        .company {
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px 12px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-height: 80px;
+            justify-content: center;
+            will-change: transform;
+        }
+
+
+        .company:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            border-color: var(--category-color, #667eea);
+        }
+
+
+        .company-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            object-fit: contain;
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+        }
+
+
+        .company-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+
+        .company-tag {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .large-company {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+
+        .large-company .company-name {
+            color: white;
+        }
+
+
+        .large-company .company-tag {
+            background: #ffd700;
+        }
+
+
+        .unicorn {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            border-color: #ff6b6b;
+        }
+
+
+        .unicorn .company-name {
+            color: white;
+        }
+
+
+        .unicorn .company-tag {
+            background: #ff1744;
+        }
+
+
+        .startup {
+            background: linear-gradient(135deg, #54a0ff, #2ed573);
+            color: white;
+            border-color: #54a0ff;
+        }
+
+
+        .startup .company-name {
+            color: white;
+        }
+
+
+        .startup .company-tag {
+            background: #00e676;
+        }
+
+
+        /* カテゴリ別カラー設定 */
+        .llm-models {
+            --category-color: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .text-generation {
+            --category-color: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .image-generation {
+            --category-color: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .voice-audio {
+            --category-color: linear-gradient(135deg, #e67e22, #d35400);
+        }
+
+        .video-generation {
+            --category-color: linear-gradient(135deg, #1abc9c, #16a085);
+        }
+
+        .multimodal {
+            --category-color: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .business-solutions {
+            --category-color: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .platform-tools {
+            --category-color: linear-gradient(135deg, #34495e, #2c3e50);
+        }
+
+
+        @media (max-width: 1200px) {
+            .chaos-map {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 25px;
+                padding: 30px;
+            }
+
+            .header h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .chaos-map {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .header {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .legend {
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .company-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+
+
+        @media (max-width: 480px) {
+            .legend {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+            }
+        }
+
+
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #ecf0f1;
+        }
+
+
+        .footer-section p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+
+    <div class="container">
+        <div class="header">
+            <h1>🚀 日本生成AI企業エコシステム 2025</h1>
+            <p>次世代AIテクノロジーを牽引する日本企業の包括的マップ</p>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">108</div>
+                    <div class="stat-label">掲載企業数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">主要カテゴリ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">¥8,000億</div>
+                    <div class="stat-label">2028年市場規模</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">84.4%</div>
+                    <div class="stat-label">年平均成長率</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                <span class="legend-text">大手企業・上場企業</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #ff6b6b, #feca57);"></div>
+                <span class="legend-text">ユニコーン・大型調達</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #54a0ff, #2ed573);"></div>
+                <span class="legend-text">注目スタートアップ</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: white; border: 2px solid #e2e8f0;"></div>
+                <span class="legend-text">その他・新興企業</span>
+            </div>
+        </div>
+
+
+        <div class="chaos-map">
+            <!-- LLM・基盤モデル -->
+            <div class="category llm-models">
+                <div class="category-header">
+                    <div class="category-title">
+                        <span class="category-icon">🧠</span>
+                        LLM・基盤モデル
+                    </div>
+                    <div class="category-subtitle">大規模言語モデル・基盤AI技術開発</div>
+                    <div class="category-count">14社</div>
+                </div>
+                <div class="company-grid">
+                    <div class="company unicorn pulse">
+                        <div class="company-name">Sakana AI</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">Preferred Networks</div>
+                    </div>
+                    <div class="company startup">
+                        <div class="company-name">ELYZA</div>
+                    </div>
+                    <div class="company startup">
+                        <div class="company-name">rinna</div>
+                    </div>
+                    <div class="company startup">
+                        <div class="company-name">オルツ</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">CyberAgent</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">LINE</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">SoftBank</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Laboro.AI</div>
+                    </div>
+                    <div class="company startup">
+                        <div class="company-name">Spiral.AI</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ニューラルグループ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">アラヤ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">LeapMind</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">PKSHA Technology</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- テキスト生成・言語処理 -->
+            <div class="category text-generation">
+                <div class="category-header">
+                    <div class="category-title">
+                        <span class="category-icon">📝</span>
+                        テキスト生成・対話
+                    </div>
+                    <div class="category-subtitle">文章生成・要約・翻訳・チャットボット</div>
+                    <div class="category-count">16社</div>
+                </div>
+                <div class="company-grid">
+                    <div class="company large-company">
+                        <div class="company-name">AI inside</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">エーアイ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">FRONTEO</div>
+                    </div>
+                    <div class="company startup">
+                        <div class="company-name">Jitera</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Neural Pocket</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">neoAI</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">bestat</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">GHELIA</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">AlgoX</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">コエステーション</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Nuco</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ChillStack</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">コズム</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">ブレインパッド</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">モビルス</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">SHIFT AI</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 画像生成・ビジュアル -->
+            <div class="category image-generation">
+                <div class="category-header">
+                    <div class="category-title">
+                        <span class="category-icon">🎨</span>
+                        画像生成・ビジュアル
+                    </div>
+                    <div class="category-subtitle">画像・イラスト・デザイン・3DCG生成</div>
+                    <div class="category-count">15社</div>
+                </div>
+                <div class="company-grid">
+                    <div class="company large-company">
+                        <div class="company-name">Preferred Elements</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">スペースラボ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">オープンエイト</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">グラッドキューブ</div>
+                    </div>
+                    <div class="company startup">
+                        <div class="company-name">Sapeet</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">エルピクセル</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Mobility Technologies</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ZENKIGEN</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">デジタルガレージ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ピクスタ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">フォトクリエイト</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">アドウェイズ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">クリエイターズマッチ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Canva Japan</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Adobe Japan</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 音声・音楽生成 -->
+            <div class="category voice-audio">
+                <div class="category-header">
+                    <div class="category-title">
+                        <span class="category-icon">🎵</span>
+                        音声・音楽生成
+                    </div>
+                    <div class="category-subtitle">音声合成・音楽制作・音声認識</div>
+                    <div class="category-count">13社</div>
+                </div>
+                <div class="company-grid">
+                    <div class="company large-company">
+                        <div class="company-name">エーアイ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Stand Technologies</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ReadSpeaker</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">コエステーション</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">AudioStock</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ハコスコ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Amadeus Code</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">ヤマハ</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">Roland</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">カワイ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">フェアリーデバイセズ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">EmoshApe</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Bonfire</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 動画生成・編集 -->
+            <div class="category video-generation">
+                <div class="category-header">
+                    <div class="category-title">
+                        <span class="category-icon">🎬</span>
+                        動画生成・編集
+                    </div>
+                    <div class="category-subtitle">動画制作・編集自動化・ライブ配信</div>
+                    <div class="category-count">13社</div>
+                </div>
+                <div class="company-grid">
+                    <div class="company startup">
+                        <div class="company-name">NoLang</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Vidnoz</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">FIXER</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">オープンエイト</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">モビルス</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">LOCUS</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Viibar</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Crevo</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">RICHKA</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">VideoBot</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">LetroStudio</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">プルークス</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">サムライト</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- マルチモーダル・統合AI -->
+            <div class="category multimodal">
+                <div class="category-header">
+                    <div class="category-title">
+                        <span class="category-icon">🔄</span>
+                        マルチモーダル
+                    </div>
+                    <div class="category-subtitle">複数メディア対応・AI統合ソリューション</div>
+                    <div class="category-count">12社</div>
+                </div>
+                <div class="company-grid">
+                    <div class="company large-company">
+                        <div class="company-name">NTT</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">NEC</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">富士通</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">OPTiM</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">ABEJA</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">エクサウィザーズ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">トリプルアイズ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">LIFULL</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ヘッドウォータース</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Hmcomm</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">アドダイス</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">Ridge-i</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ビジネスソリューション -->
+            <div class="category business-solutions">
+                <div class="category-header">
+                    <div class="category-title">
+                        <span class="category-icon">💼</span>
+                        コンサルティング
+                    </div>
+                    <div class="category-subtitle">企業向けAIコンサルティング・システム導入</div>
+                    <div class="category-count">15社</div>
+                </div>
+                <div class="company-grid">
+                    <div class="company large-company">
+                        <div class="company-name">Google Japan</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">Microsoft Japan</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">AWS Japan</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">日立</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">NTTデータ</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">アクセンチュア</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">PwC Japan</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">デロイト</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">KPMG</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">野村総合研究所</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">NTTコムウェア</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">伊藤忠テクノソリューションズ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">TIS</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">日本IBM</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">SCSK</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- プラットフォーム・ツール -->
+            <div class="category platform-tools">
+                <div class="category-header">
+                    <div class="category-title">
+                        <span class="category-icon">🛠️</span>
+                        プラットフォーム
+                    </div>
+                    <div class="category-subtitle">開発基盤・APIサービス・エコシステム</div>
+                    <div class="category-count">15社</div>
+                </div>
+                <div class="company-grid">
+                    <div class="company large-company">
+                        <div class="company-name">ウェルスナビ</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">クラウドワークス</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">チームラボ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">グッドパッチ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ディップ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">フリー</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">メルカリ</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">楽天</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">ヤフー</div>
+                    </div>
+                    <div class="company large-company">
+                        <div class="company-name">DeNA</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">GREE</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ガンホー</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">ミクシィ</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">はてな</div>
+                    </div>
+                    <div class="company">
+                        <div class="company-name">クックパッド</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h3>市場トレンド</h3>
+                        <p>2024年の国内生成AI市場は1,016億円規模に達し、2028年には8,028億円へと急成長が予測されています。</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>注目分野</h3>
+                        <p>LLM基盤モデル、マルチモーダルAI、ビジネスソリューションが特に注目を集めています。</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>投資動向</h3>
+                        <p>Sakana AIの383億円調達を筆頭に、大型投資が相次いでいます。</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2025 日本生成AI企業エコシステム | データ更新日: 2025年6月</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <script>
+        // 企業カードのインタラクション（イベント委譲で最適化）
+        document.querySelector('.chaos-map').addEventListener('click', function (e) {
+            const company = e.target.closest('.company');
+            if (!company) return;
+
+            const companyName = company.querySelector('.company-name').textContent;
+
+            // 軽量なポップアップ効果
+            company.style.transform = 'translateY(-5px)';
+            setTimeout(() => {
+                company.style.transform = '';
+            }, 200);
+
+
+            showCompanyInfo(companyName);
+        });
+
+
+        // カテゴリカウントの動的更新
+        document.querySelectorAll('.category').forEach(category => {
+            const companies = category.querySelectorAll('.company').length;
+            const countElement = category.querySelector('.category-count');
+            if (countElement) {
+                countElement.textContent = `${companies}社`;
+            }
+        });
+
+
+        // フローティングシェイプのアニメーション（軽量化）
+        let shapeCount = 0;
+        const maxShapes = 2;
+
+        function createFloatingShape() {
+            if (shapeCount >= maxShapes) return;
+
+            const shape = document.createElement('div');
+            shape.className = 'shape';
+            shape.style.left = Math.random() * 100 + '%';
+            shape.style.top = Math.random() * 100 + '%';
+            shape.style.width = Math.random() * 40 + 30 + 'px';
+            shape.style.height = shape.style.width;
+            shape.style.animationDelay = Math.random() * 10 + 's';
+            document.querySelector('.floating-shapes').appendChild(shape);
+            shapeCount++;
+
+            setTimeout(() => {
+                if (shape.parentNode) {
+                    shape.remove();
+                    shapeCount--;
+                }
+            }, 15000);
+        }
+
+
+        // 初期シェイプ作成を遅延
+        setTimeout(() => {
+            createFloatingShape();
+            setInterval(createFloatingShape, 8000);
+        }, 2000);
+
+
+        // 企業情報データベース
+        const companyInfo = {
+            'Sakana AI': 'AIの進化的手法に特化した研究開発を行い、大規模言語モデルの効率的な学習・推論技術を開発。日本発のAI研究スタートアップとして国際的に注目。',
+            'Preferred Networks': '自動運転・ロボティクス・バイオヘルスケア分野でのAI応用に強み。独自の深層学習フレームワーク「Chainer」開発元として技術力を誇る。',
+            'ELYZA': '日本語特化の大規模言語モデル開発に注力。東京大学発のスタートアップとして、日本語処理に最適化されたLLMを提供。',
+            'rinna': 'マイクロソフト出身者が設立した日本語対話AI専門企業。チャットボット・音声合成技術を核とした会話AIソリューションを展開。',
+            'オルツ': 'デジタルクローン技術で人格をAI化。個人の思考・記憶・感情を再現するパーソナルAIの開発・実用化を推進。',
+            'CyberAgent': '広告配信最適化AI・ゲームAI・メディアコンテンツ生成AIを展開。独自の大規模言語モデル開発にも取り組む総合エンターテイメント企業。',
+            'LINE': 'LINE Clovaを中心とした音声AI・チャットボット・画像認識技術を提供。日本最大のメッセージングプラットフォームでのAI活用を推進。',
+            'SoftBank': 'ソフトバンクグループとしてAI投資・研究開発を推進。Vision FundによるグローバルAI企業への戦略投資も積極展開。',
+            'Laboro.AI': '特化型AIソリューションの受託開発に強み。製造業・金融業・小売業向けのカスタムAIシステム構築を専門とする。',
+            'Spiral.AI': 'エンタープライズ向けAIプラットフォーム開発。自然言語処理・機械学習を活用したビジネスインテリジェンスソリューションを提供。',
+            'ニューラルグループ': 'ニューラルネットワーク技術に特化したAI研究開発企業。深層学習アルゴリズムの最適化・高速化技術を中心に展開。',
+            'アラヤ': '脳科学とAIの融合研究に取り組む。意識・認知機能の解明を通じて、次世代AI技術の基盤研究を推進。',
+            'LeapMind': 'エッジAI・組み込みAI技術に特化。IoTデバイス・モバイル端末向けの軽量・高速AI推論エンジンを開発。',
+            'PKSHA Technology': 'アルゴリズム技術を核とした企業向けAIソリューション。自然言語処理・画像認識・音声認識の実用化に強み。',
+            'AI inside': 'DX推進を支援するAIプラットフォーム「DX Suite」を提供。OCR・文書処理・業務自動化AIソリューションを展開。',
+            'エーアイ': '音声合成技術のパイオニア企業。高品質な日本語音声合成エンジン「AITalk」を核とした音声AI技術を提供。',
+            'FRONTEO': 'AI・機械学習を活用したリーガルテック・ヘルスケア分野のソリューション。独自の自然言語処理技術「KIBIT」を展開。',
+            'Jitera': 'ソフトウェア開発の自動化AI「Jitera」を提供。コード生成・テスト自動化・開発プロセス最適化を実現。',
+            'Neural Pocket': 'モバイル向けAI技術開発に特化。スマートフォンアプリでの画像認識・自然言語処理・推論エンジンを提供。',
+            'neoAI': 'ビジネス向けAIチャットボット・対話システム開発。顧客サポート・営業支援・社内業務自動化AIを展開。',
+            'bestat': 'データ分析・予測AI技術を活用したマーケティングソリューション。顧客行動分析・需要予測・最適化技術を提供。',
+            'GHELIA': 'ゲーム・エンターテイメント業界向けAI技術開発。キャラクターAI・プロシージャル生成・ゲームバランス調整AIを専門とする。',
+            'AlgoX': 'アルゴリズム取引・金融AI技術の開発・提供。機械学習を活用した投資戦略・リスク管理システムを展開。',
+            'コエステーション': '音声合成・音声認識技術に特化。パーソナライズド音声生成・多言語対応音声AIソリューションを提供。',
+            'Nuco': 'ヘルスケア・医療分野でのAI活用を推進。診断支援・治療最適化・医療データ解析AIシステムを開発。',
+            'ChillStack': 'クラウドネイティブAIプラットフォーム開発。機械学習モデルのデプロイ・運用・監視ツールを提供。',
+            'コズム': '建設・不動産業界向けAIソリューション。建物設計・施工管理・不動産価格予測AIシステムを展開。',
+            'ブレインパッド': 'データ活用・アナリティクス分野のリーディングカンパニー。AI・機械学習を活用したビジネス最適化コンサルティングを提供。',
+            'モビルス': '動画・映像制作自動化AIに特化。動画編集・エフェクト生成・コンテンツ最適化技術を提供する映像AI企業。',
+            'SHIFT AI': 'ソフトウェアテスト・QA業務の自動化AI。テストケース生成・バグ検出・品質管理AIシステムを展開。',
+            'Preferred Elements': 'クリエイティブAI・画像生成技術に特化。イラスト・デザイン・3DCG生成AIツールの開発・提供を行う。',
+            'スペースラボ': '宇宙・衛星データ解析AI技術開発。リモートセンシング・地球観測データの機械学習解析ソリューションを提供。',
+            'オープンエイト': '動画制作・ライブ配信技術にAIを融合。自動編集・リアルタイム映像処理・配信最適化AIを展開。',
+            'グラッドキューブ': 'デジタルマーケティング向けAI技術。広告最適化・顧客ターゲティング・コンバージョン予測AIを提供。',
+            'Sapeet': 'eコマース・小売業向け画像認識AI。商品検索・在庫管理・価格最適化・顧客行動分析AIソリューションを展開。',
+            'エルピクセル': '医療画像診断AI・ライフサイエンス分野でのAI活用。放射線診断・病理診断・創薬支援AIシステムを開発。',
+            'Mobility Technologies': '交通・モビリティ分野でのAI技術活用。配車最適化・ルート予測・需要予測AIシステムを「MOV」プラットフォームで展開。',
+            'ZENKIGEN': 'HR・人材業界向けAIソリューション。採用マッチング・人材評価・組織分析AIシステムを提供。',
+            'デジタルガレージ': 'デジタルマーケティング・フィンテック分野でのAI活用。決済・広告・eコマース最適化AIソリューションを展開。',
+            'ピクスタ': '画像・動画素材プラットフォームにAI技術を統合。自動タグ付け・検索最適化・コンテンツ推薦AIを提供。',
+            'フォトクリエイト': '写真・画像処理AIに特化。自動補正・画像生成・人物認識・イベント写真管理AIシステムを展開。',
+            'アドウェイズ': 'デジタル広告・アフィリエイト業界でのAI活用。広告配信最適化・収益化・ユーザー行動予測AIを提供。',
+            'クリエイターズマッチ': 'クリエイター・コンテンツ制作支援AI。動画編集・デザイン生成・コンテンツ最適化AIツールを開発。',
+            'Canva Japan': 'デザイン制作プラットフォームでのAI機能提供。自動デザイン生成・テンプレート最適化・ブランドキット管理AIを展開。',
+            'Adobe Japan': 'Creative CloudでのAI機能「Adobe Sensei」を展開。画像・動画編集・デザイン制作でのAI支援ツールを提供。',
+            'Stand Technologies': '音声・音楽制作AIに特化したスタートアップ。楽曲生成・音響効果・音声合成技術の開発・提供を行う。',
+            'ReadSpeaker': '音声合成・読み上げ技術のグローバルリーダー。多言語対応・高品質音声生成エンジンを提供。',
+            'AudioStock': '音楽・音声素材プラットフォームにAI技術を統合。楽曲推薦・自動タグ付け・音響解析AIシステムを展開。',
+            'ハコスコ': 'VR・AR技術と音声AIを融合。没入型体験・空間音響・バーチャルコンサートでのAI活用を推進。',
+            'Amadeus Code': 'AI作曲・音楽制作技術に特化。楽曲生成アルゴリズム・メロディー創作・音楽理論AIシステムを開発。',
+            'ヤマハ': '楽器・音響機器メーカーとしてAI技術を統合。自動演奏・音楽教育・作曲支援AIシステムを展開。',
+            'Roland': '電子楽器・音響機器でのAI活用。演奏支援・音色生成・リズムパターン創作AIを楽器に組み込み提供。',
+            'カワイ': 'ピアノ・楽器メーカーとして音楽教育AIを展開。演奏評価・練習支援・音楽理論学習AIシステムを提供。',
+            'フェアリーデバイセズ': '音声認識・音響処理技術に特化。エッジデバイス向け音声AI・ノイズキャンセリング技術を開発。',
+            'EmoshApe': '感情認識・音声解析AIに特化。声質・感情状態・ストレス検知・コミュニケーション支援AIを展開。',
+            'Bonfire': '音楽・エンターテイメント業界向けAI技術。ライブ配信・音響最適化・観客体験向上AIシステムを提供。',
+            'NoLang': '多言語動画制作・翻訳AIに特化。自動字幕生成・音声翻訳・グローバル配信最適化技術を展開。',
+            'Vidnoz': '動画生成・編集AIプラットフォーム。AIアバター・自動編集・動画最適化技術を活用したコンテンツ制作ツールを提供。',
+            'FIXER': 'クラウド・インフラ技術と動画AIを融合。配信最適化・動画解析・ストリーミング技術でのAI活用を推進。',
+            'LOCUS': '位置情報・地図データと動画技術を組み合わせ。ドローン映像・地理空間情報・動画マッピングAIを展開。',
+            'Viibar': '動画マーケティング・制作プラットフォームでのAI活用。動画効果測定・ターゲティング・制作最適化AIを提供。',
+            'Crevo': '動画制作・アニメーション分野でのAI技術統合。自動アニメーション生成・キャラクター制作・映像編集AIを展開。',
+            'RICHKA': 'SNS・デジタルマーケティング向け動画生成AI。テンプレート自動生成・ブランド最適化・配信スケジューリングAIを提供。',
+            'VideoBot': 'チャットボット・対話システムと動画技術を融合。インタラクティブ動画・パーソナライズド配信AIを展開。',
+            'LetroStudio': '映像制作・ポストプロダクション向けAI技術。色補正・エフェクト生成・編集自動化AIツールを提供。',
+            'プルークス': '企業向け動画制作・マーケティングでのAI活用。動画効果測定・コンテンツ最適化・配信戦略AIを展開。',
+            'サムライト': 'コンテンツマーケティング・動画制作でのAI技術統合。記事・動画生成・SEO最適化・配信効果測定AIを提供。',
+            'NTT': '通信インフラ・研究開発でマルチモーダルAI技術を推進。音声・画像・テキスト統合処理・5G活用AIソリューションを展開。',
+            'NEC': '社会インフラ・セキュリティ分野でのマルチモーダルAI。顔認証・行動解析・異常検知・都市最適化AIシステムを提供。',
+            '富士通': 'エンタープライズ向け統合AIプラットフォーム「Zinrai」を展開。業務効率化・予測分析・最適化AIソリューションを提供。',
+            'OPTiM': '農業・医療・建設業界でのAIソリューション「OPTiM AI Camera」。画像認識・IoT・ドローン技術を統合展開。',
+            'ABEJA': '小売・製造業向けエッジAIプラットフォーム。店舗解析・品質管理・需要予測・在庫最適化AIシステムを提供。',
+            'エクサウィザーズ': 'AI技術の社会実装に特化。医療・介護・教育・行政分野でのAI導入・コンサルティングサービスを展開。',
+            'トリプルアイズ': '画像認識・コンピュータビジョンAI技術に特化。小売・製造・物流業界向け視覚的品質管理・自動化システムを提供。',
+            'LIFULL': '不動産・住宅業界でのAI活用。物件推薦・価格予測・顧客マッチング・不動産投資最適化AIシステムを展開。',
+            'ヘッドウォータース': 'データサイエンス・機械学習コンサルティング。製造・金融・小売業向けAI導入・運用支援サービスを提供。',
+            'Hmcomm': '音声認識・自然言語処理技術に特化。コールセンター・音声解析・対話システムAIソリューションを展開。',
+            'アドダイス': 'デジタル広告・マーケティング最適化AI。リアルタイム入札・ターゲティング・配信効果測定AIシステムを提供。',
+            'Ridge-i': '製造業・インフラ向けAI技術。異常検知・予防保全・品質管理・生産最適化AIソリューションを展開。',
+            'Google Japan': 'Google CloudのAI・機械学習サービスを日本企業向けに展開。TensorFlow・AutoML・Vertex AIプラットフォームを提供。',
+            'Microsoft Japan': 'Azure AI・Cognitive ServicesによるエンタープライズAIソリューション。Office 365・Teams連携AIサービスを展開。',
+            'AWS Japan': 'Amazon Web ServicesのAI・機械学習クラウドサービス。SageMaker・Rekognition・ComprehendによるAI基盤を提供。',
+            '日立': '社会イノベーション事業でのAI活用「Lumada」プラットフォーム。インフラ・ヘルスケア・金融向けAIソリューションを展開。',
+            'NTTデータ': 'システムインテグレーション・DX推進でのAI技術活用。金融・公共・製造業向けAI導入コンサルティング・開発を提供。',
+            'アクセンチュア': 'グローバルコンサルティング企業としてAI戦略・導入支援。業界横断的なAI活用・デジタル変革サービスを展開。',
+            'PwC Japan': 'プロフェッショナルサービス・コンサルティングでのAI活用。監査・税務・アドバイザリー業務でのAI技術統合を推進。',
+            'デロイト': '戦略コンサルティング・デジタル変革でのAI技術活用。業界特化型AIソリューション・人材育成プログラムを提供。',
+            'KPMG': '監査・アドバイザリーサービスでのAI技術統合。財務・リスク管理・コンプライアンス分野でのAI活用を推進。',
+            '野村総合研究所': '金融・IT業界向けAIコンサルティング・システム開発。資産運用・リスク管理・顧客分析AIソリューションを展開。',
+            'NTTコムウェア': 'NTTグループのシステム開発・運用でAI技術活用。通信・公共・企業向けAIシステム構築・保守サービスを提供。',
+            '伊藤忠テクノソリューションズ': 'ITソリューション・システム開発でのAI技術統合。流通・金融・製造業向けAI導入・運用支援を展開。',
+            'TIS': 'システムインテグレーション・クラウドサービスでのAI活用。決済・物流・小売業向けAIプラットフォーム構築を提供。',
+            '日本IBM': 'IBM Watson・AI技術の日本市場展開。エンタープライズ向けAI導入・コンサルティング・技術支援サービスを提供。',
+            'SCSK': 'システム開発・運用・保守でのAI技術活用。製造・流通・金融業向けAI導入・デジタル変革支援サービスを展開。',
+            'ウェルスナビ': 'ロボアドバイザー・資産運用でのAI活用。投資アルゴリズム・ポートフォリオ最適化・リスク管理AIシステムを提供。',
+            'クラウドワークス': 'クラウドソーシング・フリーランス支援プラットフォームでのAI活用。マッチング・品質管理・価格最適化AIを展開。',
+            'チームラボ': 'デジタルアート・エンターテイメント分野でのAI技術統合。インタラクティブ展示・体験設計・創作支援AIを提供。',
+            'グッドパッチ': 'UI/UXデザイン・プロダクト開発でのAI技術活用。デザイン最適化・ユーザビリティ分析・プロトタイプ生成AIを展開。',
+            'ディップ': '人材・求人サービス「バイトル」でのAI活用。求人マッチング・採用予測・人材評価・給与最適化AIシステムを提供。',
+            'フリー': '会計・経理業務自動化AI「freee」プラットフォーム。帳簿作成・税務処理・経営分析・予測AIソリューションを展開。',
+            'メルカリ': 'フリマアプリ・C2CプラットフォームでのAI活用。商品推薦・価格設定・不正検知・配送最適化AIシステムを提供。',
+            '楽天': 'eコマース・フィンテック・通信事業でのAI技術統合。購買予測・広告最適化・決済・配送効率化AIを展開。',
+            'ヤフー': '検索・eコマース・広告事業でのAI技術活用。検索アルゴリズム・ターゲティング・コンテンツ最適化AIシステムを提供。',
+            'DeNA': 'ゲーム・エンターテイメント・モビリティ事業でのAI活用。ゲームAI・配車システム・ヘルスケアプラットフォームを展開。',
+            'GREE': 'ソーシャルゲーム・エンターテイメント事業でのAI技術活用。ゲーム内AI・ユーザー行動分析・収益最適化AIシステムを展開。',
+            'ガンホー': 'オンラインゲーム開発・運営でのAI技術統合。ゲームバランス調整・プレイヤーマッチング・コンテンツ生成AIを提供。',
+            'ミクシィ': 'SNS・ゲーム事業でのAI活用。コミュニティ分析・コンテンツ推薦・ユーザーエンゲージメント最適化AIシステムを展開。',
+            'はてな': 'ウェブサービス・ブログプラットフォームでのAI技術統合。コンテンツ推薦・検索最適化・スパム検知AIシステムを提供。',
+            'クックパッド': '料理・レシピサービスでのAI活用。レシピ推薦・食材認識・献立提案・栄養分析AIシステムを展開。'
+        };
+
+
+        // 企業情報ポップアップ表示機能
+        function showCompanyInfo(companyName) {
+            const existingPopup = document.querySelector('.company-popup');
+            if (existingPopup) {
+                existingPopup.remove();
+            }
+
+
+            const description = companyInfo[companyName] || '日本の生成AIエコシステムを牽引する注目企業の一つです。詳細な企業情報については、公式サイトをご確認ください。';
+
+
+            const popup = document.createElement('div');
+            popup.className = 'company-popup';
+            popup.innerHTML = `
+               <div style="
+                   position: fixed;
+                   top: 50%;
+                   left: 50%;
+                   transform: translate(-50%, -50%);
+                   background: white;
+                   padding: 30px;
+                   border-radius: 20px;
+                   box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                   z-index: 1000;
+                   max-width: 500px;
+                   width: 90%;
+                   animation: popupAppear 0.3s ease;
+               ">
+                   <h3 style="margin: 0 0 15px 0; color: #2d3748; font-size: 1.5rem;">${companyName}</h3>
+                   <p style="color: #718096; margin-bottom: 20px; line-height: 1.6; font-size: 0.95rem;">
+                       ${description}
+                   </p>
+                   <button onclick="this.parentElement.parentElement.remove()" style="
+                       background: linear-gradient(135deg, #667eea, #764ba2);
+                       color: white;
+                       border: none;
+                       padding: 12px 24px;
+                       border-radius: 10px;
+                       cursor: pointer;
+                       font-weight: 600;
+                       transition: all 0.3s ease;
+                   ">閉じる</button>
+               </div>
+               <div style="
+                   position: fixed;
+                   top: 0;
+                   left: 0;
+                   width: 100%;
+                   height: 100%;
+                   background: rgba(0,0,0,0.5);
+                   z-index: 999;
+               " onclick="this.parentElement.remove()"></div>
+           `;
+
+
+            const style = document.createElement('style');
+            style.textContent = `
+               @keyframes popupAppear {
+                   from {
+                       opacity: 0;
+                       transform: translate(-50%, -50%) scale(0.8);
+                   }
+                   to {
+                       opacity: 1;
+                       transform: translate(-50%, -50%) scale(1);
+                   }
+               }
+           `;
+            document.head.appendChild(style);
+            document.body.appendChild(popup);
+        }
+
+
+        // パフォーマンス最適化
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+
+        document.querySelectorAll('.category').forEach(category => {
+            category.style.opacity = '0';
+            category.style.transform = 'translateY(20px)';
+            category.style.transition = 'all 0.6s ease';
+            observer.observe(category);
+        });
+
+
+        // 統計アニメーション（軽量化）
+        function animateNumbers() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach((stat, index) => {
+                const finalValue = stat.textContent;
+                const isPercentage = finalValue.includes('%');
+                const isCurrency = finalValue.includes('¥');
+
+                setTimeout(() => {
+                    if (isPercentage) {
+                        const num = parseFloat(finalValue.replace('%', ''));
+                        animateValue(stat, 0, num, 1000, '%');
+                    } else if (isCurrency) {
+                        stat.textContent = finalValue;
+                    } else {
+                        const num = parseInt(finalValue.replace(/[^\d]/g, ''));
+                        animateValue(stat, 0, num, 1000, '');
+                    }
+                }, index * 100);
+            });
+        }
+
+
+        function animateValue(element, start, end, duration, suffix = '') {
+            const startTime = performance.now();
+            const animate = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentValue = Math.floor(progress * (end - start) + start);
+                element.textContent = currentValue + suffix + (suffix === '' && end > 100 ? '+' : '');
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            };
+            requestAnimationFrame(animate);
+        }
+
+
+        // DOM構築完了後に実行
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(animateNumbers, 500);
+        });
+    </script>
+</body>
+
+</html>
